@@ -1,0 +1,2 @@
+kotlin-coroutine-1.x=org.apache.skywalking.apm.plugin.kotlin.coroutine.v1.define.NewCoroutineContextInstrumentation
+kotlin-coroutine-1.x=org.apache.skywalking.apm.plugin.kotlin.coroutine.v1.define.DispatcherInstrumentation
