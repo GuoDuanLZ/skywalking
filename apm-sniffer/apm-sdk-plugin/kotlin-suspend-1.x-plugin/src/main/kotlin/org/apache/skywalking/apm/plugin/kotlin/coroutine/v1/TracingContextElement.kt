@@ -10,7 +10,7 @@ import kotlin.coroutines.AbstractCoroutineContextElement
 import kotlin.coroutines.CoroutineContext
 
 class TracingContextElement : AbstractCoroutineContextElement(Key),
-    ThreadContextElement<AbstractSpan?> {
+        ThreadContextElement<AbstractSpan?> {
     companion object Key : CoroutineContext.Key<TracingContextElement> {
         const val SUSPEND_CALL = "KotlinSuspend"
     }

@@ -7,12 +7,12 @@ import org.apache.skywalking.apm.agent.core.plugin.interceptor.enhance.MethodInt
 import java.lang.reflect.Method
 import kotlin.coroutines.CoroutineContext
 
-class DispatcherInterceptor: InstanceMethodsAroundInterceptor{
+class DispatcherInterceptor : InstanceMethodsAroundInterceptor {
     override fun beforeMethod(objInst: EnhancedInstance?, method: Method?, allArguments: Array<out Any>, argumentsTypes: Array<out Class<*>>?, result: MethodInterceptResult?) {
         val context = allArguments[0] as CoroutineContext
-        context[TracingContextElement.Key]?.snapshot = if(ContextManager.isActive()){
+        context[TracingContextElement.Key]?.snapshot = if (ContextManager.isActive()) {
             ContextManager.capture()
-        }else null
+        } else null
     }
 
     override fun afterMethod(objInst: EnhancedInstance?, method: Method?, allArguments: Array<out Any>?, argumentsTypes: Array<out Class<*>>?, ret: Any?): Any? {

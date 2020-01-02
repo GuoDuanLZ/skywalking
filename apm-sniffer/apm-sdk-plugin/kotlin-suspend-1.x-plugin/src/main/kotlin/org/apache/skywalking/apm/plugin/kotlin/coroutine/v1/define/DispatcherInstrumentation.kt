@@ -14,7 +14,7 @@ import org.apache.skywalking.apm.agent.core.plugin.match.ClassMatch
 import org.apache.skywalking.apm.agent.core.plugin.match.HierarchyMatch
 import org.apache.skywalking.apm.agent.core.plugin.match.NameMatch
 
-class DispatcherInstrumentation: ClassEnhancePluginDefine(){
+class DispatcherInstrumentation : ClassEnhancePluginDefine() {
     override fun enhanceClass(): ClassMatch {
         return HierarchyMatch.byHierarchyMatch("kotlinx.coroutines.CoroutineDispatcher")
     }
@@ -35,8 +35,8 @@ class DispatcherInstrumentation: ClassEnhancePluginDefine(){
         return true
     }
 
-    object DispatcherInterceptPoint: InstanceMethodsInterceptPoint {
-        private const val INTERCEPTOR_CLASS =  "org.apache.skywalking.apm.plugin.kotlin.coroutine.v1.DispatcherInterceptor"
+    object DispatcherInterceptPoint : InstanceMethodsInterceptPoint {
+        private const val INTERCEPTOR_CLASS = "org.apache.skywalking.apm.plugin.kotlin.coroutine.v1.DispatcherInterceptor"
         private const val ARGUMENT0_CLASS = "kotlin.coroutines.CoroutineContext"
         private const val ARGUMENT1_CLASS = "java.lang.Runnable"
 

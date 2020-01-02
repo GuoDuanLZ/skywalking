@@ -34,8 +34,8 @@ class NewCoroutineContextInstrumentation : ClassEnhancePluginDefine() {
         return arrayOf(NewCoroutineContextInterceptPoint)
     }
 
-    object NewCoroutineContextInterceptPoint: StaticMethodsInterceptPoint {
-        private const val INTERCEPTOR_CLASS =  "org.apache.skywalking.apm.plugin.kotlin.coroutine.v1.NewCoroutineContextInterceptor"
+    object NewCoroutineContextInterceptPoint : StaticMethodsInterceptPoint {
+        private const val INTERCEPTOR_CLASS = "org.apache.skywalking.apm.plugin.kotlin.coroutine.v1.NewCoroutineContextInterceptor"
         private const val ARGUMENT0_CLASS = "kotlinx.coroutines.CoroutineScope"
         private const val ARGUMENT1_CLASS = "kotlin.coroutines.CoroutineContext"
 
