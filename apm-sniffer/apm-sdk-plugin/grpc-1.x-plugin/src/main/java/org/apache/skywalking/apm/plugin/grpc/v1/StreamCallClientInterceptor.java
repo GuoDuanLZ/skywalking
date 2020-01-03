@@ -34,10 +34,7 @@ import org.apache.skywalking.apm.agent.core.context.trace.AbstractSpan;
 import org.apache.skywalking.apm.agent.core.context.trace.SpanLayer;
 import org.apache.skywalking.apm.network.trace.component.ComponentsDefine;
 
-import static org.apache.skywalking.apm.plugin.grpc.v1.Constants.CLIENT;
-import static org.apache.skywalking.apm.plugin.grpc.v1.Constants.STREAM_RESPONSE_OBSERVER_ON_COMPLETE_OPERATION_NAME;
-import static org.apache.skywalking.apm.plugin.grpc.v1.Constants.STREAM_RESPONSE_OBSERVER_ON_ERROR_OPERATION_NAME;
-import static org.apache.skywalking.apm.plugin.grpc.v1.Constants.STREAM_RESPONSE_OBSERVER_ON_NEXT_OPERATION_NAME;
+import static org.apache.skywalking.apm.plugin.grpc.v1.Constants.*;
 import static org.apache.skywalking.apm.plugin.grpc.v1.OperationNameFormatUtil.formatOperationName;
 
 /**
@@ -108,7 +105,7 @@ public class StreamCallClientInterceptor extends ForwardingClientCall.SimpleForw
         @Override
         public void onMessage(Object message) {
             try {
-                ContextManager.createLocalSpan(operationPrefix + STREAM_RESPONSE_OBSERVER_ON_NEXT_OPERATION_NAME);
+                SpanLayer.asRPCFramework(ContextManager.createLocalSpan(operationPrefix + REQUEST_OBSERVER_ON_MESSAGE_OPERATION_NAME));
                 ContextManager.continued(contextSnapshot);
                 delegate().onMessage(message);
             } catch (Throwable t) {
@@ -121,12 +118,14 @@ public class StreamCallClientInterceptor extends ForwardingClientCall.SimpleForw
         @Override
         public void onClose(Status status, Metadata trailers) {
             try {
+                AbstractSpan abstractSpan;
                 if (!status.isOk()) {
-                    AbstractSpan abstractSpan = ContextManager.createLocalSpan(operationPrefix + STREAM_RESPONSE_OBSERVER_ON_ERROR_OPERATION_NAME);
+                    abstractSpan = ContextManager.createLocalSpan(operationPrefix + REQUEST_OBSERVER_ON_CANCEL_OPERATION_NAME);
                     abstractSpan.errorOccurred().log(status.asRuntimeException());
+                    SpanLayer.asRPCFramework(abstractSpan);
                     Tags.STATUS_CODE.set(abstractSpan, status.getCode().name());
                 } else {
-                    AbstractSpan abstractSpan = ContextManager.createLocalSpan(operationPrefix + STREAM_RESPONSE_OBSERVER_ON_COMPLETE_OPERATION_NAME);
+                    SpanLayer.asRPCFramework(ContextManager.createLocalSpan(operationPrefix + REQUEST_OBSERVER_ON_COMPLETE_OPERATION_NAME));
                 }
                 delegate().onClose(status, trailers);
                 ContextManager.continued(contextSnapshot);

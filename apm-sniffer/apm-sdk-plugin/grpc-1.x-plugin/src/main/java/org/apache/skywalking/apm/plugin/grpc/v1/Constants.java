@@ -28,16 +28,16 @@ public class Constants {
 
     public static final String SERVER = "/server";
 
-    public static final String STREAM_REQUEST_OBSERVER_ON_NEXT_OPERATION_NAME = "/RequestObserver/onNext";
 
-    public static final String STREAM_REQUEST_OBSERVER_ON_ERROR_OPERATION_NAME = "/RequestObserver/onError";
+    public static final String REQUEST_OBSERVER_ON_MESSAGE_OPERATION_NAME = "/RequestObserver/onMessage";
 
-    public static final String STREAM_REQUEST_OBSERVER_ON_COMPLETE_OPERATION_NAME = "/RequestObserver/onComplete";
+    public static final String REQUEST_OBSERVER_ON_COMPLETE_OPERATION_NAME = "/RequestObserver/onComplete";
 
-    public static final String STREAM_RESPONSE_OBSERVER_ON_NEXT_OPERATION_NAME = "/ResponseObserver/onNext";
+    public static final String REQUEST_OBSERVER_ON_CANCEL_OPERATION_NAME = "/RequestObserver/onCancel";
 
-    public static final String STREAM_RESPONSE_OBSERVER_ON_ERROR_OPERATION_NAME = "/ResponseObserver/onError";
+    public static final String RESPONSE_OBSERVER_ON_MESSAGE_OPERATION_NAME = "/ResponseObserver/onMessage";
 
-    public static final String STREAM_RESPONSE_OBSERVER_ON_COMPLETE_OPERATION_NAME = "/ResponseObserver/onComplete";
+    public static final String RESPONSE_OBSERVER_ON_COMPLETE_OPERATION_NAME = "/ResponseObserver/onComplete";
 
+    public static final String RESPONSE_OBSERVER_ON_ClOSE_OPERATION_NAME = "/ResponseObserver/onClose";
 }
